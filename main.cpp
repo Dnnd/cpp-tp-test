@@ -104,7 +104,7 @@ public:
     if (fields.size() == 0) {
       return;
     }
-    for (auto i = 0; i < fields.size() - 1; ++i) {
+    for (size_t i = 0; i < fields.size() - 1; ++i) {
       os << fields[i] << delim_;
     }
     os << fields[fields.size() - 1];
@@ -135,10 +135,7 @@ void test_read_and_dump() {
 void test_read_5_lines_and_dump() {
   std::cout << "\ntest_read_5_lines_and_dump\n";
   auto io = FieldsIO('\t');
-  std::vector<Fields> lines;
-  for (std::size_t i = 0; i < 5; ++i) {
-    lines.push_back(io.read_fields(std::cin));
-  }
+  std::vector<Fields> lines = io.read_fields_multiline(std::cin, 5);
   io.dump_fields_multiline(std::cout, lines.begin(), lines.end());
 
   std::cout << "\ntest_read_5_lines_and_dump ends\n";
